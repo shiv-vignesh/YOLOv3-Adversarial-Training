@@ -1,0 +1,49 @@
+{
+    "dataset_kwargs":{
+        "trainer_dataset_kwargs":{
+            "lidar_dir":"../CSCI739/data/velodyne/training/velodyne",
+            "calibration_dir":"../CSCI739/data/calibration/training/calib",
+            "left_image_dir":"../CSCI739/data/left_images/training/image_2",
+            "right_image_dir":null,
+            "labels_dir":"../CSCI739/data/labels/training/label_2",
+            "train_batch_size":1,
+            "shuffle":true,
+            "apply_augmentation":true
+        },
+        "validation_dataset_kwargs":{
+            "lidar_dir":"../CSCI739/data/velodyne/validation/velodyne",
+            "calibration_dir":"../CSCI739/data/calibration/validation/calib",
+            "left_image_dir":"../CSCI739/data/left_images/validation/image_2",
+            "right_image_dir":null,
+            "labels_dir":"../CSCI739/data/labels/validation/label_2",
+            "train_batch_size":1,
+            "shuffle":true,
+            "apply_augmentation":false            
+        }, 
+        "image_resize":[416, 416], 
+        "perform_validation":false
+    },
+    "optimizer_kwargs":{
+        "_description": "default_lr is for any layer other than lm",
+        "type": "AdamW"
+    },
+    "lr_scheduler_kwargs":{
+    },
+    "trainer_kwargs":{
+        "output_dir": "adversarial_training_kitti_pgd",
+        "attack_type":"pgd",
+        "alignment_type":"irl",
+        "is_training":true,
+        "first_val_epoch": 0,
+        "metric_eval_mode": "strict",
+        "metric_average_mode": "macro",
+        "epochs": 60,
+        "monitor_train": true,
+        "monitor_val": true,
+        "gradient_clipping": 1.0,
+        "device": "cuda:1", 
+        "checkpoint_idx":1
+    },
+    "callback_kwargs":{
+    }
+}
